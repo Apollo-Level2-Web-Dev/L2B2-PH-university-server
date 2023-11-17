@@ -67,12 +67,12 @@ const localGuradianSchema = new Schema<LocalGuardian>({
 });
 
 const studentSchema = new Schema<Student>({
-  id: { type: String },
+  id: { type: String, unique: true },
   name: userNameSchema,
-  gender: ['male', 'female'],
+  gender:  ['male', 'female'],
   dateOfBirth: { type: String },
   email: { type: String, required: true },
-  contactNo: { type: String, required: true },
+  contactNo: { type: String, required: true, unique: true },
   emergencyContactNo: { type: String, required: true },
   bloogGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
   presentAddress: { type: String, required: true },
