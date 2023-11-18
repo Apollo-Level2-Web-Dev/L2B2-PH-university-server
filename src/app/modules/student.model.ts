@@ -79,6 +79,12 @@ const localGuradianSchema = new Schema<TLocalGuardian>({
 
 const studentSchema = new Schema<TStudent, StudentModel>({
   id: { type: String, required: [true, 'ID is required'], unique: true },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    unique: true,
+    maxlength: 30,
+  },
   name: {
     type: userNameSchema,
     required: [true, 'Name is required'],
@@ -130,6 +136,16 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     },
     default: 'active',
   },
+});
+
+// pre save middleware/ hook : will work on create()  save()
+studentSchema.pre('save', function () {
+  console.log(this, 'pre hook : we will save  data');
+});
+
+// post save middleware / hook
+studentSchema.post('save', function () {
+  console.log(this, 'post hook : We saved our data');
 });
 
 //creating a custom static method

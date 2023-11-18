@@ -24,6 +24,7 @@ export type TLocalGuardian = {
 
 export type TStudent = {
   id: string;
+  password: string;
   name: TUserName;
   gender: 'male' | 'female';
   dateOfBirth?: string;
@@ -38,12 +39,6 @@ export type TStudent = {
   profileImg?: string;
   isActive: 'active' | 'blocked';
 };
-
-
-
-
-
-
 
 //for creating static
 
