@@ -1,27 +1,20 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
-import config from '../config';
+import config from '../../config';
 import {
   StudentModel,
   TGuardian,
   TLocalGuardian,
   TStudent,
   TUserName,
-} from './student/student.interface';
+} from './student.interface';
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
     type: String,
     required: [true, 'First Name is required'],
     trim: true,
-    maxlength: [20, 'First Name can not be more than 20 characters'],
-    validate: {
-      validator: function (value: string) {
-        const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1); //Mezba
-        return firstNameStr === value;
-      },
-      message: '{VALUE} is not in capitalize format',
-    },
+    maxlength: [20, 'Name can not be more than 20 characters'],
   },
   middleName: {
     type: String,
@@ -29,17 +22,21 @@ const userNameSchema = new Schema<TUserName>({
   },
   lastName: {
     type: String,
+    trim: true,
     required: [true, 'Last Name is required'],
+    maxlength: [20, 'Name can not be more than 20 characters'],
   },
 });
 
 const guardianSchema = new Schema<TGuardian>({
   fatherName: {
     type: String,
+    trim: true,
     required: [true, 'Father Name is required'],
   },
   fatherOccupation: {
     type: String,
+    trim: true,
     required: [true, 'Father occupation is required'],
   },
   fatherContactNo: {
@@ -156,9 +153,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 
 // virtual
 studentSchema.virtual('fullName').get(function () {
-  return (
-    this.name.firstName + this.name.middleName + this.name.lastName
-  );
+  return this.name.firstName + this.name.middleName + this.name.lastName;
 });
 
 // pre save middleware/ hook : will work on create()  save()
@@ -201,7 +196,6 @@ studentSchema.pre('aggregate', function (next) {
 //creating a custom static method
 studentSchema.statics.isUserExists = async function (id: string) {
   const existingUser = await Student.findOne({ id });
-
   return existingUser;
 };
 
