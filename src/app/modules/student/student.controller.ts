@@ -4,24 +4,10 @@ import studentValidationSchema from './student.validation';
 
 const createStudent = async (req: Request, res: Response) => {
   try {
-    // creating a student validation using Joi
     const { student: studentData } = req.body;
-
-    // data validation using Joi
-    // const { error, value } = studentValidationSchema.validate(studentData);
-
-    // data validation using Zod
     const zodParsedData = studentValidationSchema.parse(studentData);
 
     const result = await StudentServices.createStudentIntoDB(zodParsedData);
-
-    // if (error) {
-    //   res.status(200).json({
-    //     success: false,
-    //     message: 'something went wrong',
-    //     error: error.details,
-    //   });
-    // }
 
     res.status(200).json({
       success: true,
@@ -37,9 +23,40 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
+const pick = <T extends Record<string, unknown>, k extends keyof T>(
+  obj: T,
+  keys: k[],
+): Partial<T> => {
+  const finalObj: Partial<T> = {};
+
+  for (const key of keys) {
+    if (obj && Object.hasOwnProperty.call(obj, key)) {
+      finalObj[key] = obj[key];
+    }
+  }
+  return finalObj;
+};
+
+export default pick;
+
 const getAllStudents = async (req: Request, res: Response) => {
   try {
-    const result = await StudentServices.getAllStudentsFromDB();
+    const paginationFields = ['page', 'limit', 'sortBy', 'sortOrder'];
+
+    const queryObj = { ...req.query };
+    const paginations = pick(queryObj, paginationFields);
+    const filters = pick(queryObj, [
+      'searchTerm',
+      'id',
+      'name',
+      'email',
+      'year',
+    ]);
+
+    const result = await StudentServices.getAllStudentsFromDB(
+      filters,
+      paginations,
+    );
 
     res.status(200).json({
       success: true,
