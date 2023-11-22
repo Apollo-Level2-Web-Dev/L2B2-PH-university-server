@@ -23,40 +23,9 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
-const pick = <T extends Record<string, unknown>, k extends keyof T>(
-  obj: T,
-  keys: k[],
-): Partial<T> => {
-  const finalObj: Partial<T> = {};
-
-  for (const key of keys) {
-    if (obj && Object.hasOwnProperty.call(obj, key)) {
-      finalObj[key] = obj[key];
-    }
-  }
-  return finalObj;
-};
-
-export default pick;
-
 const getAllStudents = async (req: Request, res: Response) => {
   try {
-    const paginationFields = ['page', 'limit', 'sortBy', 'sortOrder'];
-
-    const queryObj = { ...req.query };
-    const paginations = pick(queryObj, paginationFields);
-    const filters = pick(queryObj, [
-      'searchTerm',
-      'id',
-      'name',
-      'email',
-      'year',
-    ]);
-
-    const result = await StudentServices.getAllStudentsFromDB(
-      filters,
-      paginations,
-    );
+    const result = await StudentServices.getAllStudentsFromDB();
 
     res.status(200).json({
       success: true,
