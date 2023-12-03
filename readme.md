@@ -22,7 +22,7 @@ Description: The second ER diagram provides additional insights into the structu
 
 #### Diagram 3
 
-![ER Diagram 3](./ER%20DIAGRAM3.png)
+![ER Diagram 3](./ER%20Diagram3%20.png)
 
 Description: The third ER diagram adds further complexity, depicting relationships to the overall system architecture.
 
