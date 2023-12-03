@@ -12,12 +12,12 @@ Description: This document outlines the detailed analysis of project requirement
 
 ![ER Diagram 1](./ER_Diagram.png)
 
-Description: This is a basic diagram illustrates the relationships between entities in the system. Key entities and their connections are visually represented.
+Description: This is a basic diagram illustrates the relationships among User, Student, Admin & Faculty
 
 #### Diagram 2
 
 ![UPDATED ER DIAGRAM](./Final.png)
 
-Description: The third ER diagram adds further complexity, depicting relationships to the overall system architecture.
+Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department.
 
 ---
