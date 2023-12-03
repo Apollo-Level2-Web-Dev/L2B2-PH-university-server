@@ -16,13 +16,7 @@ Description: This is a basic diagram illustrates the relationships between entit
 
 #### Diagram 2
 
-![ER Diagram 2](./ER%20Diagram2.png)
-
-Description: The second ER diagram provides additional insights into the structure of the database, showing how different entities interact with each other.
-
-#### Diagram 3
-
-![ER Diagram 3](./ER%20Diagram3%20.png)
+![UPDATED ER DIAGRAM](./Final.png)
 
 Description: The third ER diagram adds further complexity, depicting relationships to the overall system architecture.
 
