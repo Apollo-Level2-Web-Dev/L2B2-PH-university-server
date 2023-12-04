@@ -1,5 +1,16 @@
 import { Model, Types } from 'mongoose';
 
+export type TGender = 'male' | 'female' | 'other';
+export type TBloodGroup =
+  | 'A+'
+  | 'A-'
+  | 'B+'
+  | 'B-'
+  | 'AB+'
+  | 'AB-'
+  | 'O+'
+  | 'O-';
+
 export type TUserName = {
   firstName: string;
   middleName: string;
@@ -11,12 +22,12 @@ export type TFaculty = {
   user: Types.ObjectId;
   designation: string;
   name: TUserName;
-  gender: 'male' | 'female' | 'other';
+  gender: TGender;
   dateOfBirth?: Date;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
-  bloogGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
+  bloogGroup?: TBloodGroup;
   presentAddress: string;
   permanentAddress: string;
   profileImg?: string;
@@ -24,20 +35,6 @@ export type TFaculty = {
   isDeleted: boolean;
 };
 
-//for creating static
-
-export interface StudentModel extends Model<TFaculty> {
+export interface FacultyModel extends Model<TFaculty> {
   isUserExists(id: string): Promise<TFaculty | null>;
 }
-
-// for creating instance
-
-// export interface StudentMethods {
-//   isUserExists(id: string): Promise<TStudent | null>;
-// }
-
-// export type StudentModel = Model<
-//   TStudent,
-//   Record<string, never>,
-//   StudentMethods
-// >;

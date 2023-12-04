@@ -1,16 +1,22 @@
 import { z } from 'zod';
-import { BloodGroup, Gender } from './admin.constant';
+import { BloodGroup, Gender } from './faculty.constant';
 
 const createUserNameValidationSchema = z.object({
-  firstName: z.string().min(1).max(20),
-  middleName: z.string().max(20),
-  lastName: z.string().max(20),
+  firstName: z
+    .string()
+    .min(1)
+    .max(20)
+    .refine((value) => /^[A-Z]/.test(value), {
+      message: 'First Name must start with a capital letter',
+    }),
+  middleName: z.string(),
+  lastName: z.string(),
 });
 
-export const createAdminValidationSchema = z.object({
+export const createFacultyValidationSchema = z.object({
   body: z.object({
     password: z.string().max(20),
-    admin: z.object({
+    faculty: z.object({
       designation: z.string(),
       name: createUserNameValidationSchema,
       gender: z.enum([...Gender] as [string, ...string[]]),
@@ -21,22 +27,23 @@ export const createAdminValidationSchema = z.object({
       bloogGroup: z.enum([...BloodGroup] as [string, ...string[]]),
       presentAddress: z.string(),
       permanentAddress: z.string(),
+      academicDepartment: z.string(),
       profileImg: z.string(),
     }),
   }),
 });
 
 const updateUserNameValidationSchema = z.object({
-  firstName: z.string().min(3).max(20).optional(),
-  middleName: z.string().min(3).max(20).optional(),
-  lastName: z.string().min(3).max(20).optional(),
+  firstName: z.string().min(1).max(20).optional(),
+  middleName: z.string().optional(),
+  lastName: z.string().optional(),
 });
 
-export const updateAdminValidationSchema = z.object({
+export const updateFacultyValidationSchema = z.object({
   body: z.object({
-    admin: z.object({
+    faculty: z.object({
+      designation: z.string().optional(),
       name: updateUserNameValidationSchema,
-      designation: z.string().max(30).optional(),
       gender: z.enum([...Gender] as [string, ...string[]]).optional(),
       dateOfBirth: z.string().optional(),
       email: z.string().email().optional(),
@@ -46,11 +53,12 @@ export const updateAdminValidationSchema = z.object({
       presentAddress: z.string().optional(),
       permanentAddress: z.string().optional(),
       profileImg: z.string().optional(),
+      academicDepartment: z.string().optional(),
     }),
   }),
 });
 
-export const AdminValidations = {
-  createAdminValidationSchema,
-  updateAdminValidationSchema,
+export const studentValidations = {
+  createFacultyValidationSchema,
+  updateFacultyValidationSchema,
 };

@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
-import { BloodGroup, Gender } from './admin.constant';
-import { AdminModel, TAdmin, TUserName } from './admin.interface';
+import { BloodGroup, Gender } from './faculty.constant';
+import { FacultyModel, TFaculty, TUserName } from './faculty.interface';
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -21,7 +21,7 @@ const userNameSchema = new Schema<TUserName>({
   },
 });
 
-const adminSchema = new Schema<TAdmin, AdminModel>(
+const facultySchema = new Schema<TFaculty, FacultyModel>(
   {
     id: {
       type: String,
@@ -77,6 +77,11 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
       required: [true, 'Permanent address is required'],
     },
     profileImg: { type: String },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'User id is required'],
+      ref: 'User',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -90,7 +95,7 @@ const adminSchema = new Schema<TAdmin, AdminModel>(
 );
 
 // generating full name
-adminSchema.virtual('fullName').get(function () {
+facultySchema.virtual('fullName').get(function () {
   return (
     this?.name?.firstName +
     '' +
@@ -101,25 +106,25 @@ adminSchema.virtual('fullName').get(function () {
 });
 
 // filter out deleted documents
-adminSchema.pre('find', function (next) {
+facultySchema.pre('find', function (next) {
   this.find({ isDeleted: { $ne: true } });
   next();
 });
 
-adminSchema.pre('findOne', function (next) {
+facultySchema.pre('findOne', function (next) {
   this.find({ isDeleted: { $ne: true } });
   next();
 });
 
-adminSchema.pre('aggregate', function (next) {
+facultySchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
   next();
 });
 
 //checking if user is already exist!
-adminSchema.statics.isUserExists = async function (id: string) {
-  const existingUser = await Admin.findOne({ id });
+facultySchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await Faculty.findOne({ id });
   return existingUser;
 };
 
-export const Admin = model<TAdmin, AdminModel>('Admin', adminSchema);
+export const Faculty = model<TFaculty, FacultyModel>('Faculty', facultySchema);
