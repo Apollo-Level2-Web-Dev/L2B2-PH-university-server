@@ -36,6 +36,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   if (!admissionSemester) {
     throw new AppError(400, 'Admission semester not found');
   }
+  
   const session = await mongoose.startSession();
 
   try {
