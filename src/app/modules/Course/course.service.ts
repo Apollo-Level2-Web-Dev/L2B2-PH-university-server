@@ -101,16 +101,16 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
       if (!newPreRequisiteCourses) {
         throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update course');
       }
-
-      const result = await Course.findById(id).populate(
-        'preRequisiteCourses.course',
-      );
-
-      return result;
     }
 
     await session.commitTransaction();
     await session.endSession();
+
+    const result = await Course.findById(id).populate(
+      'preRequisiteCourses.course',
+    );
+
+    return result;
   } catch (err) {
     await session.abortTransaction();
     await session.endSession();
