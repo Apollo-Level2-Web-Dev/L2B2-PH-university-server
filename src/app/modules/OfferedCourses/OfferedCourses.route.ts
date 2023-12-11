@@ -7,9 +7,9 @@ router.get('/', OfferedCourseController.getAllFromDB);
 router.get('/:id', OfferedCourseController.getByIdFromDB);
 
 router.post(
-  '/',
+  '/create-offered-course',
 
-  OfferedCourseController.insertIntoDB,
+  OfferedCourseController.createOfferedCourse,
 );
 
 router.patch(

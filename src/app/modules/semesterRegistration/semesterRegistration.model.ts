@@ -2,6 +2,17 @@ import mongoose, { Schema } from 'mongoose';
 import { TSemesterRegistration } from './semesterRegistration.interface';
 
 const semesterRegistrationSchema = new mongoose.Schema<TSemesterRegistration>({
+  academicSemester: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicSemester',
+    unique: true,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['UPCOMING', 'ONGOING', 'ENDED'],
+    default: 'UPCOMING',
+  },
   startDate: {
     type: Date,
     required: true,
@@ -10,23 +21,14 @@ const semesterRegistrationSchema = new mongoose.Schema<TSemesterRegistration>({
     type: Date,
     required: true,
   },
-  status: {
-    type: String,
-    enum: ['UPCOMING'],
-    default: 'UPCOMING',
-  },
   minCredit: {
     type: Number,
-    default: 0,
+    min: 3,
   },
   maxCredit: {
     type: Number,
-    default: 0,
-  },
-  academicSemester: {
-    type: Schema.Types.ObjectId,
-    ref: 'Academicsemester',
-    required: true,
+    max: 20,
+    default: 16,
   },
 });
 

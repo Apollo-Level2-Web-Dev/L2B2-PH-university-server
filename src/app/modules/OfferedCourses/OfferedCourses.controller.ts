@@ -2,10 +2,12 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { offeredCourseService } from './OfferedCourses.service';
+import { offeredCourseServices } from './OfferedCourses.service';
 
-const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await offeredCourseService.insertIntoDB(req.body);
+const createOfferedCourse = catchAsync(async (req: Request, res: Response) => {
+  const result = await offeredCourseServices.createOfferedCourseIntoDB(
+    req.body,
+  );
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -15,7 +17,7 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-  const result = await offeredCourseService.getAllFromDB(req.query);
+  const result = await offeredCourseServices.getAllFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -27,7 +29,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
 
 const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await offeredCourseService.getByIdFromDB(id);
+  const result = await offeredCourseServices.getByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -38,7 +40,7 @@ const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
 
 const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await offeredCourseService.updateOneInDB(id, req.body);
+  const result = await offeredCourseServices.updateOneInDB(id, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -49,7 +51,7 @@ const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
 
 const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await offeredCourseService.deleteByIdFromDB(id);
+  const result = await offeredCourseServices.deleteByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -59,7 +61,7 @@ const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const OfferedCourseController = {
-  insertIntoDB,
+  createOfferedCourse,
   getAllFromDB,
   getByIdFromDB,
   updateOneInDB,

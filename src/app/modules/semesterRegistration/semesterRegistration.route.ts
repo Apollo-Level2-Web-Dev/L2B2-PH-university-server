@@ -1,31 +1,25 @@
 import express from 'express';
+import validateRequest from '../../middlewares/validateRequest';
 import { SemesterRegistrationController } from './semesterRegistration.controller';
+import { SemesterRegistrationValidations } from './semesterRegistration.validation';
 
 const router = express.Router();
 
-router.get('/:id', SemesterRegistrationController.getByIdFromDB);
-
 router.post(
-  '/',
-
-  SemesterRegistrationController.insertIntoDB,
+  '/create-semester-registration',
+  validateRequest(
+    SemesterRegistrationValidations.createSemesterRegistrationValidationSchema,
+  ),
+  SemesterRegistrationController.createSemesterRegistration,
 );
 
-router.patch(
+router.get(
   '/:id',
-
-  SemesterRegistrationController.updateOneInDB,
+  SemesterRegistrationController.getSingleSemesterRegistration,
 );
 
-router.delete(
-  '/:id',
+router.patch('/:id', SemesterRegistrationController.updateSemesterRegistration);
 
-  SemesterRegistrationController.deleteByIdFromDB,
-);
-
-// router.post(
-//   '/:id/start-new-semester',
-//   SemesterRegistrationController.startNewSemester,
-// );
+router.get('/', SemesterRegistrationController.getAllSemesterRegistrations);
 
 export const semesterRegistrationRoutes = router;
