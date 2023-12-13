@@ -127,6 +127,8 @@ const updateSemesterRegistrationIntoDB = async (
   return result;
 };
 
+
+
 export const SemesterRegistrationService = {
   createSemesterRegistrationIntoDB,
   getAllSemesterRegistrationsFromDB,
