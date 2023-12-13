@@ -56,6 +56,7 @@ const createOfferedCourseIntoDB = async (payload: TOfferedCourse) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Faculty not found !');
   }
 
+  
   const result = await OfferedCourse.create({ ...payload, academicSemester });
   return result;
 };
