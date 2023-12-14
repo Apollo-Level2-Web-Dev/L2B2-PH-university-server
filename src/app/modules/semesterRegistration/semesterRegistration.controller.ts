@@ -68,6 +68,8 @@ const updateSemesterRegistration = catchAsync(
   },
 );
 
+
+
 export const SemesterRegistrationController = {
   createSemesterRegistration,
   updateSemesterRegistration,
