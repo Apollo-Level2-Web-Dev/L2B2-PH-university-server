@@ -8,7 +8,7 @@ Description: This document outlines the detailed analysis of project requirement
 
 ### Entity-Relationship Diagrams
 
-![ER DIAGRAM](./er_diagram.png)
+![ER DIAGRAM](./erdiagram.png)
 
 Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department , Course , Semester Registration , Offered Couse.
 
