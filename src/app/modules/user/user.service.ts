@@ -11,7 +11,7 @@ import { AcademicDepartment } from '../academicDepartment/academicDepartment.mod
 import { TStudent } from '../student/student.interface';
 import { Student } from '../student/student.model';
 import { AcademicSemester } from './../academicSemester/academicSemester.model';
-import { IUser } from './user.interface';
+import { TUser } from './user.interface';
 import { User } from './user.model';
 import {
   generateAdminId,
@@ -21,7 +21,7 @@ import {
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   // create a user object
-  const userData: Partial<IUser> = {};
+  const userData: Partial<TUser> = {};
 
   //if password is not given , use deafult password
   userData.password = password || (config.default_password as string);
@@ -77,7 +77,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
 
 const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   // create a user object
-  const userData: Partial<IUser> = {};
+  const userData: Partial<TUser> = {};
 
   //if password is not given , use deafult password
   userData.password = password || (config.default_password as string);
@@ -133,7 +133,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 
 const createAdminIntoDB = async (password: string, payload: TAdmin) => {
   // create a user object
-  const userData: Partial<IUser> = {};
+  const userData: Partial<TUser> = {};
 
   //if password is not given , use deafult password
   userData.password = password || (config.default_password as string);
