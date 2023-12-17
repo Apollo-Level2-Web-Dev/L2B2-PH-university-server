@@ -8,16 +8,14 @@ Description: This document outlines the detailed analysis of project requirement
 
 ### Entity-Relationship Diagrams
 
-#### Diagram 1
+![ER DIAGRAM](./erdiagram.png)
 
-![ER Diagram 1](./ER_Diagram.png)
+Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department , Course , Semester Registration , Offered Couse.
 
-Description: This is a basic diagram illustrates the relationships among User, Student, Admin & Faculty
+---
 
-#### Diagram 2
+![POSTMAN COLLECTION](./postman_collection.json)
 
-![UPDATED ER DIAGRAM](./Final.png)
-
-Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department.
+Description: This is a postman collection of all the API endpoints.Download this , and import it in your postman if you needed.
 
 ---
