@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import express from 'express';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
+import { upload } from '../../utils/sendImageToCloudinary';
 import { createAdminValidationSchema } from '../Admin/admin.validation';
 import { createFacultyValidationSchema } from '../Faculty/faculty.validation';
 import { createStudentValidationSchema } from './../student/student.validation';
@@ -26,6 +28,12 @@ router.post(
 router.post(
   '/create-admin',
   // auth(USER_ROLE.admin),
+
+  upload.single('file'),
+  (req, res, next) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
   validateRequest(createAdminValidationSchema),
   UserControllers.createAdmin,
 );
