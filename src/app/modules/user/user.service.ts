@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import config from '../../config';
 import AppError from '../../errors/AppError';
+import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 import { TAdmin } from '../Admin/admin.interface';
 import { Admin } from '../Admin/admin.model';
 import { TFaculty } from '../Faculty/faculty.interface';
@@ -19,7 +20,11 @@ import {
   generateStudentId,
 } from './user.utils';
 
-const createStudentIntoDB = async (password: string, payload: TStudent) => {
+const createStudentIntoDB = async (
+  file: any,
+  password: string,
+  payload: TStudent,
+) => {
   // create a user object
   const userData: Partial<TUser> = {};
 
@@ -47,6 +52,11 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
     //set  generated id
     userData.id = await generateStudentId(admissionSemester);
 
+    const imageName = `${userData.id}${payload?.name?.firstName}`;
+    const path = file?.path;
+    //send image to cloudinary
+    const { secure_url } = await sendImageToCloudinary(imageName, path);
+
     // create a user (transaction-1)
     const newUser = await User.create([userData], { session }); // array
 
@@ -57,6 +67,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
     // set id , _id as user
     payload.id = newUser[0].id;
     payload.user = newUser[0]._id; //reference _id
+    payload.profileImg = secure_url;
 
     // create a student (transaction-2)
 
