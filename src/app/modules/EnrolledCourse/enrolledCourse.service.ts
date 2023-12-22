@@ -3,11 +3,13 @@ import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import AppError from '../../errors/AppError';
 import { Course } from '../Course/course.model';
+import { Faculty } from '../Faculty/faculty.model';
 import { OfferedCourse } from '../OfferedCourse/OfferedCourse.model';
 import { SemesterRegistration } from '../semesterRegistration/semesterRegistration.model';
 import { Student } from '../student/student.model';
 import { TEnrolledCourse } from './enrolledCourse.interface';
 import EnrolledCourse from './enrolledCourse.model';
+import { calculateGradeAndPoints } from './enrolledCourse.utils';
 
 const createEnrolledCourseIntoDB = async (
   userId: string,
@@ -165,11 +167,65 @@ const updateEnrolledCourseMarksIntoDB = async (
   if (!isOfferedCourseExists) {
     throw new AppError(httpStatus.NOT_FOUND, 'Offered course not found !');
   }
-  const isStudentExists = await Student.findById(offeredCourse);
+  const isStudentExists = await Student.findById(student);
 
   if (!isStudentExists) {
     throw new AppError(httpStatus.NOT_FOUND, 'Student not found !');
   }
+
+  const faculty = await Faculty.findOne({ id: facultyId }, { _id: 1 });
+
+  if (!faculty) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Faculty not found !');
+  }
+
+  const isCourseBelongToFaculty = await EnrolledCourse.findOne({
+    semesterRegistration,
+    offeredCourse,
+    student,
+    faculty: faculty._id,
+  });
+
+  if (!isCourseBelongToFaculty) {
+    throw new AppError(httpStatus.FORBIDDEN, 'You are forbidden! !');
+  }
+
+  const modifiedData: Record<string, unknown> = {
+    ...courseMarks,
+  };
+
+  if (courseMarks?.finalTerm) {
+    const { classTest1, classTest2, midTerm, finalTerm } =
+      isCourseBelongToFaculty.courseMarks;
+
+    const totalMarks =
+      Math.ceil(classTest1 * 0.1) +
+      Math.ceil(midTerm * 0.3) +
+      Math.ceil(classTest2 * 0.1) +
+      Math.ceil(finalTerm * 0.5);
+
+    const result = calculateGradeAndPoints(totalMarks);
+
+    modifiedData.grade = result.grade;
+    modifiedData.gradePoints = result.gradePoints;
+    modifiedData.isCompleted = true;
+  }
+
+  if (courseMarks && Object.keys(courseMarks).length) {
+    for (const [key, value] of Object.entries(courseMarks)) {
+      modifiedData[`courseMarks.${key}`] = value;
+    }
+  }
+
+  const result = await EnrolledCourse.findByIdAndUpdate(
+    isCourseBelongToFaculty._id,
+    modifiedData,
+    {
+      new: true,
+    },
+  );
+
+  return result;
 };
 
 export const EnrolledCourseServices = {
