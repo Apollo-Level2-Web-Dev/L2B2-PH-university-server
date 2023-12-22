@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { TCourseMarks, TEnrolledCourse } from './enrolledCourse.interface';
 import { Grade } from './enrolledCourse.constant';
+import { TCourseMarks, TEnrolledCourse } from './enrolledCourse.interface';
 
 const courseMarksSchema = new Schema<TCourseMarks>(
   {
@@ -37,6 +37,11 @@ const enrolledCourseSchema = new Schema<TEnrolledCourse>({
     ref: 'AcademicSemester',
     required: true,
   },
+  academicFaculty: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicFaculty',
+    required: true,
+  },
   academicDepartment: {
     type: Schema.Types.ObjectId,
     ref: 'AcademicDepartment',
@@ -68,6 +73,7 @@ const enrolledCourseSchema = new Schema<TEnrolledCourse>({
   },
   courseMarks: {
     type: courseMarksSchema,
+    default: {},
   },
   grade: {
     type: String,

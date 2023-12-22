@@ -1,1 +1,1 @@
-export const Grade = ['A', 'B', 'C', 'D', 'F', 'N/A'];
+export const Grade = ['A', 'B', 'C', 'D', 'F', 'NA'];
