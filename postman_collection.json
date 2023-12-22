@@ -8,16 +8,253 @@
 	},
 	"item": [
 		{
-			"name": "User",
+			"name": "Auth",
 			"item": [
 				{
-					"name": "Create a student",
+					"name": "Login Admin",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"ami123\",\r\n    \"student\": {\r\n        \"name\": {\r\n            \"firstName\": \"Samin\",\r\n            \"middleName\": \"Israr\",\r\n            \"lastName\": \"ravi\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n        \"email\": \"ravi@gmail.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"guardian\": {\r\n            \"fatherName\": \"James Doe\",\r\n            \"fatherOccupation\": \"Engineer\",\r\n            \"fatherContactNo\": \"111-222-3333\",\r\n            \"motherName\": \"Mary Doe\",\r\n            \"motherOccupation\": \"Teacher\",\r\n            \"motherContactNo\": \"444-555-6666\"\r\n        },\r\n        \"localGuardian\": {\r\n            \"name\": \"Alice Johnson\",\r\n            \"occupation\": \"Doctor\",\r\n            \"contactNo\": \"777-888-9999\",\r\n            \"address\": \"789 Pine St, Villageton\"\r\n        },\r\n        \"admissionSemester\": \"65663d516435f247a24e9169\",\r\n        \"academicDepartment\":\"656701b4adaebc55db21bdea\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\":\"A-0001\",\r\n    \"password\":\"admin123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/login",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"2030010001\",\r\n    \"password\":\"student123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/login",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI3NDk4NTMsImV4cCI6MTcwMzYxMzg1M30.7-9ewLUARmD4YiZJ3lPXuWa9ZLJvp7L0VlgtGUlijuI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"admin12345\",\r\n    \"newPassword\": \"admin123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/change-password",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ph-local-url}}/auth/refresh-token",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{ph-local-url}}/auth/refresh-token",
+									"host": [
+										"{{ph-local-url}}"
+									],
+									"path": [
+										"auth",
+										"refresh-token"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "732"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2dc-7fzBKhTVNptfeknzLtRycCXg3+g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 16 Dec 2023 22:23:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"cookies\",\n            \"message\": \"Required\"\n        }\n    ],\n    \"err\": {\n        \"issues\": [\n            {\n                \"code\": \"invalid_type\",\n                \"expected\": \"object\",\n                \"received\": \"undefined\",\n                \"path\": [\n                    \"cookies\"\n                ],\n                \"message\": \"Required\"\n            }\n        ],\n        \"name\": \"ZodError\"\n    },\n    \"stack\": \"ZodError: [\\n  {\\n    \\\"code\\\": \\\"invalid_type\\\",\\n    \\\"expected\\\": \\\"object\\\",\\n    \\\"received\\\": \\\"undefined\\\",\\n    \\\"path\\\": [\\n      \\\"cookies\\\"\\n    ],\\n    \\\"message\\\": \\\"Required\\\"\\n  }\\n]\\n    at Object.get error [as error] (F:\\\\level2\\\\first-project\\\\node_modules\\\\zod\\\\lib\\\\types.js:43:31)\\n    at ZodObject.parseAsync (F:\\\\level2\\\\first-project\\\\node_modules\\\\zod\\\\lib\\\\types.js:166:22)\\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":\"A-0001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/forget-password",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"forget-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset  Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI4NTA5NzgsImV4cCI6MTcwMjg1MTU3OH0.Idb5STpToeQBr4MyJJDuDqCdU261Ktt7tuRaYaHoo_k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"A-0001\",\r\n    \"newPassword\":\"admin123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/reset-password",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create Student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI5MDk0OTYsImV4cCI6MTcwMjk5NTg5Nn0.kxKUoZPOLnWCJJdSE7ies_kMhH4Hsb94-Zlc-ePQsAM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"student123\",\r\n    \"student\": {\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Student2\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Good\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n        \"email\": \"abcd@gmail.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"guardian\": {\r\n            \"fatherName\": \"James Doe\",\r\n            \"fatherOccupation\": \"Engineer\",\r\n            \"fatherContactNo\": \"111-222-3333\",\r\n            \"motherName\": \"Mary Doe\",\r\n            \"motherOccupation\": \"Teacher\",\r\n            \"motherContactNo\": \"444-555-6666\"\r\n        },\r\n        \"localGuardian\": {\r\n            \"name\": \"Alice Johnson\",\r\n            \"occupation\": \"Doctor\",\r\n            \"contactNo\": \"777-888-9999\",\r\n            \"address\": \"789 Pine St, Villageton\"\r\n        },\r\n        \"admissionSemester\": \"65663d516435f247a24e9169\",\r\n        \"academicDepartment\":\"656701b4adaebc55db21bdea\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,10 +282,16 @@
 					"name": "Create Faculty",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI3NDMxNzEsImV4cCI6MTcwMzYwNzE3MX0.WERCtk7rOvo12hs63daltfzLFJVxz06ecUnYVpvw-6E",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"faculty123\",\r\n    \"faculty\": {\r\n        \"designation\":\"Lecturer\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Samin\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Ravi\"\r\n        },\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n       \r\n        \"contactNo\": \"12\",\r\n        \"emergencyContactNo\": \"12\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"academicDepartment\":\"656701b4adaebc55db21bdea\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"password\": \"faculty123\",\r\n    \"faculty\": {\r\n        \"designation\":\"Lecturer\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Samin\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Ravi\"\r\n        },\r\n        \"gender\":\"male\",\r\n        \"email\":\"faculty1@gmail.com\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n       \r\n        \"contactNo\": \"12\",\r\n        \"emergencyContactNo\": \"12\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"academicDepartment\":\"65797f29ab434256ca6e648c\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,7 +318,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"admin\": {\r\n        \"designation\":\"Admin\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Jhankar\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Mahbub\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n        \"email\": \"jhankar@gmail.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"admin\": {\r\n        \"designation\":\"Admin\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Mezbaul\",\r\n            \"middleName\": \"Abedin\",\r\n            \"lastName\": \"Forhan\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1998-04-24\",\r\n        \"email\": \"mezbaul@programming-hero.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,6 +333,64 @@
 							"path": [
 								"users",
 								"create-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ME",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI5MTE1MzQsImV4cCI6MTcwMjk5NzkzNH0.rFGShUR_KYplvQRq8DGTzYPLq8PiZbjiZflrmYALy_g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ph-local-url}}/users/me",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change User Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI5MTMxNTIsImV4cCI6MTcwMjk5OTU1Mn0.5kbBxNCvCxgVRVHDoLaUpxvaqNA-Y-xTRVHbtA-Q3Tk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"blocked\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/users/change-status/658056522d7914bff94e67cf",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"users",
+								"change-status",
+								"658056522d7914bff94e67cf"
 							]
 						}
 					},
@@ -113,7 +414,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/students?sort=-email,dateOfBirth",
+							"raw": "http://localhost:5000/api/v1/students",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -134,10 +435,6 @@
 									"key": "email",
 									"value": "ravi@gmail.com$sort",
 									"disabled": true
-								},
-								{
-									"key": "sort",
-									"value": "-email,dateOfBirth"
 								}
 							]
 						}
@@ -148,9 +445,15 @@
 					"name": "Get Single Student",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyMDMwMDEwMDAxIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3MDI5MDk4NDgsImV4cCI6MTcwMjk5NjI0OH0.6xGTuSbLr6A10AzKnAZLVdbHZY7GnJ92FXAescA8mUQ",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/students/2030010002",
+							"raw": "http://localhost:5000/api/v1/students/658056522d7914bff94e67d1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -160,7 +463,7 @@
 								"api",
 								"v1",
 								"students",
-								"2030010002"
+								"658056522d7914bff94e67d1"
 							]
 						}
 					},
@@ -227,7 +530,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI3NTEzMjEsImV4cCI6MTcwMzYxNTMyMX0.wKxdQkzGSdk3qGaoDFQGsSAalN3j12_ltubfeucXhU0",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -400,7 +709,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/admins/656ddf1c0e2e5dab57dbdad7",
+							"raw": "http://localhost:5000/api/v1/admins/657dcc7a2c59c16597756e4e",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -410,7 +719,7 @@
 								"api",
 								"v1",
 								"admins",
-								"656ddf1c0e2e5dab57dbdad7"
+								"657dcc7a2c59c16597756e4e"
 							]
 						}
 					},
@@ -777,13 +1086,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{ph-local-url}}/courses/656f13e4aac14eb8a7a73b87",
+							"raw": "{{ph-local-url}}/courses/657707078cf5db4b6e5e6450",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"courses",
-								"656f13e4aac14eb8a7a73b87"
+								"657707078cf5db4b6e5e6450"
 							]
 						}
 					},
@@ -978,11 +1287,8 @@
 				},
 				{
 					"name": "Get All Semester Registration",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -1074,7 +1380,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"semesterRegistration\":\"65797e9dab434256ca6e6488\",\r\n  \"academicFaculty\":\"656701a9adaebc55db21bde8\",\r\n  \"academicDepartment\": \"65797f29ab434256ca6e648c\",\r\n  \"course\": \"657707078cf5db4b6e5e6450\",\r\n  \"faculty\": \"656dce37133c4a8a53eb5f09\",\r\n  \"section\": 2,\r\n  \"maxCapacity\": 50,\r\n  \"days\": [\"Sun\",\"Mon\"],\r\n  \"startTime\": \"10:30\",\r\n  \"endTime\": \"12:30\"\r\n}",
+							"raw": "{\r\n  \"semesterRegistration\":\"657f07f25f71bfe7a0eb4301\",\r\n  \"academicFaculty\":\"656701a9adaebc55db21bde8\",\r\n  \"academicDepartment\": \"65797f29ab434256ca6e648c\",\r\n  \"course\": \"657707078cf5db4b6e5e6450\",\r\n  \"faculty\": \"656dce37133c4a8a53eb5f09\",\r\n  \"section\": 1,\r\n  \"maxCapacity\": 50,\r\n  \"days\": [\"Sun\",\"Mon\"],\r\n  \"startTime\": \"10:30\",\r\n  \"endTime\": \"12:30\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1223,7 +1529,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"semesterRegistration\": \"65720fd6a6737aba6dc9cc5c\",\r\n  \"student\": \"656b3f90874fc78b7aa94605\",\r\n  \"offeredCourse\": \"65735aa0c32ca66c0eb398ed\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\r\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1231,13 +1537,67 @@
 							}
 						},
 						"url": {
-							"raw": "{{ph-local-url}}/enrolled-courses/enroll-into-course",
+							"raw": "{{ph-local-url}}/enrolled-courses/create-enrolled-course",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"enrolled-courses",
-								"enroll-into-course"
+								"create-enrolled-course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mark",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\n    \"semesterRegistration\": \"657f07f25f71bfe7a0eb4301\",\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\",\n    \"courseMarks\": {\n        \"classTest1\": 85,\n        \"midTerm\": 75,\n        \"classTest2\": 90,\n        \"finalTerm\": 92\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/enrolled-courses/update-marks",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"enrolled-courses",
+								"update-marks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Final Mark",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\n    \"semesterRegistration\": \"657f07f25f71bfe7a0eb4301\",\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\",\n    \"courseMarks\": {\n        \"classTest1\": 95,\n        \"midTerm\": 35,\n        \"classTest2\": 20,\n        \"finalTerm\": 100\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/enrolled-courses/update-final-marks",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"enrolled-courses",
+								"update-final-marks"
 							]
 						}
 					},
