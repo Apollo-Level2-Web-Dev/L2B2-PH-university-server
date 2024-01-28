@@ -62,5 +62,5 @@ export const AcademicSemester = model<TAcademicSemseter>(
 //2030 Fall => Created
 
 // Autumn 01
-// Summar 02
+// Summer 02
 // Fall 03
