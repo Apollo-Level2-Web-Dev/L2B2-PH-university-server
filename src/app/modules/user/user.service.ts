@@ -45,9 +45,6 @@ const createStudentIntoDB = async (
   if (!admissionSemester) {
     throw new AppError(400, 'Admission semester not found');
   }
-<<<<<<< HEAD
-  
-=======
 
   // find department
   const academicDepartment = await AcademicDepartment.findById(
@@ -59,7 +56,6 @@ const createStudentIntoDB = async (
   }
   payload.academicFaculty = academicDepartment.academicFaculty;
 
->>>>>>> 9aadd701366cdbd92579358e4232b4e728117882
   const session = await mongoose.startSession();
 
   try {
