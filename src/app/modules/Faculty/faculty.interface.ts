@@ -32,9 +32,11 @@ export type TFaculty = {
   permanentAddress: string;
   profileImg?: string;
   academicDepartment: Types.ObjectId;
+  academicFaculty: Types.ObjectId;
   isDeleted: boolean;
 };
 
 export interface FacultyModel extends Model<TFaculty> {
+  // eslint-disable-next-line no-unused-vars
   isUserExists(id: string): Promise<TFaculty | null>;
 }
