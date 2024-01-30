@@ -1,6 +1,6 @@
 import config from '../config';
-import { USER_ROLE } from '../modules/user/user.constant';
-import { User } from '../modules/user/user.model';
+import { USER_ROLE } from '../modules/User/user.constant';
+import { User } from '../modules/User/user.model';
 
 const superUser = {
   id: '0001',

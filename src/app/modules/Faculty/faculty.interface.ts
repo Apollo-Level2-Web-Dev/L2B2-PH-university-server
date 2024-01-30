@@ -37,5 +37,6 @@ export type TFaculty = {
 };
 
 export interface FacultyModel extends Model<TFaculty> {
+  // eslint-disable-next-line no-unused-vars
   isUserExists(id: string): Promise<TFaculty | null>;
 }
