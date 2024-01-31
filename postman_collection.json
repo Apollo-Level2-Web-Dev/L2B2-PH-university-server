@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "02a735da-92f0-460b-b38c-a0452fc273cc",
-		"name": "first-project",
+		"name": "PH-university",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26682150",
 		"_collection_link": "https://interstellar-astronaut-10838.postman.co/workspace/First-Project~9ffaedc0-c14d-4f77-b93c-953710912fa4/collection/26682150-02a735da-92f0-460b-b38c-a0452fc273cc?action=share&source=collection_link&creator=26682150"
@@ -38,13 +38,67 @@
 					"response": []
 				},
 				{
+					"name": "Login Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"0001\",\r\n    \"password\":\"admin12345\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/login",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login Student",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"2030010001\",\r\n    \"password\":\"student123\" \r\n}",
+							"raw": "{\r\n    \"id\":\"2025010001\",\r\n    \"password\":\"student123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/auth/login",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Faculty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"F-0001\",\r\n    \"password\":\"faculty123\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,7 +131,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"oldPassword\": \"admin12345\",\r\n    \"newPassword\": \"admin123456\"\r\n}",
+							"raw": "{\r\n    \"oldPassword\": \"admin123\",\r\n    \"newPassword\": \"admin1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,21 +302,28 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI5MDk0OTYsImV4cCI6MTcwMjk5NTg5Nn0.kxKUoZPOLnWCJJdSE7ies_kMhH4Hsb94-Zlc-ePQsAM",
+								"value": "{{superADminToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"student123\",\r\n    \"student\": {\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Student2\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Good\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n        \"email\": \"abcd@gmail.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"guardian\": {\r\n            \"fatherName\": \"James Doe\",\r\n            \"fatherOccupation\": \"Engineer\",\r\n            \"fatherContactNo\": \"111-222-3333\",\r\n            \"motherName\": \"Mary Doe\",\r\n            \"motherOccupation\": \"Teacher\",\r\n            \"motherContactNo\": \"444-555-6666\"\r\n        },\r\n        \"localGuardian\": {\r\n            \"name\": \"Alice Johnson\",\r\n            \"occupation\": \"Doctor\",\r\n            \"contactNo\": \"777-888-9999\",\r\n            \"address\": \"789 Pine St, Villageton\"\r\n        },\r\n        \"admissionSemester\": \"65663d516435f247a24e9169\",\r\n        \"academicDepartment\":\"656701b4adaebc55db21bdea\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/F:/level2/images/Student/student-1.png",
+									"disabled": true
+								},
+								{
+									"key": "data",
+									"value": "{\n    \"password\": \"student123\",\n    \"student\": {\n        \"name\": {\n            \"firstName\": \"I am \",\n            \"middleName\": \"Student\",\n            \"lastName\": \"Number 1\"\n        },\n        \"gender\": \"male\",\n        \"dateOfBirth\": \"1990-01-01\",\n        \"email\": \"student2@gmail.com\",\n        \"contactNo\": \"1235678\",\n        \"emergencyContactNo\": \"987-654-3210\",\n        \"bloogGroup\": \"A+\",\n        \"presentAddress\": \"123 Main St, Cityville\",\n        \"permanentAddress\": \"456 Oak St, Townsville\",\n        \"guardian\": {\n            \"fatherName\": \"James Doe\",\n            \"fatherOccupation\": \"Engineer\",\n            \"fatherContactNo\": \"111-222-3333\",\n            \"motherName\": \"Mary Doe\",\n            \"motherOccupation\": \"Teacher\",\n            \"motherContactNo\": \"444-555-6666\"\n        },\n        \"localGuardian\": {\n            \"name\": \"Alice Johnson\",\n            \"occupation\": \"Doctor\",\n            \"contactNo\": \"777-888-9999\",\n            \"address\": \"789 Pine St, Villageton\"\n        },\n        \"admissionSemester\": \"65b0104110b74fcbd7a25d92\",\n        \"academicDepartment\": \"65b00fb010b74fcbd7a25d8e\"\n    }\n}\n",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/v1/users/create-student",
+							"raw": "http://localhost:5000/api/v1/users/create-student/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -272,7 +333,8 @@
 								"api",
 								"v1",
 								"users",
-								"create-student"
+								"create-student",
+								""
 							]
 						}
 					},
@@ -285,18 +347,24 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI3NDMxNzEsImV4cCI6MTcwMzYwNzE3MX0.WERCtk7rOvo12hs63daltfzLFJVxz06ecUnYVpvw-6E",
+								"value": "{{superADminToken}}",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"faculty123\",\r\n    \"faculty\": {\r\n        \"designation\":\"Lecturer\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Samin\",\r\n            \"middleName\": \"\",\r\n            \"lastName\": \"Ravi\"\r\n        },\r\n        \"gender\":\"male\",\r\n        \"email\":\"faculty1@gmail.com\",\r\n        \"dateOfBirth\": \"1990-01-01\",\r\n       \r\n        \"contactNo\": \"12\",\r\n        \"emergencyContactNo\": \"12\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"academicDepartment\":\"65797f29ab434256ca6e648c\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/F:/level2/images/Student/student-2.png"
+								},
+								{
+									"key": "data",
+									"value": "{\n    \"password\": \"faculty123\",\n    \"faculty\": {\n        \"designation\":\"Lecturer\",\n        \"name\": {\n            \"firstName\": \"Mridul \",\n            \"middleName\": \"Das\",\n            \"lastName\": \"Rahman\"\n        },\n        \"gender\":\"male\",\n        \"email\":\"faculty3@gmail.com\",\n        \"dateOfBirth\": \"1990-01-01\",\n        \"contactNo\": \"123\",\n        \"emergencyContactNo\": \"123\",\n        \"bloogGroup\": \"A+\",\n        \"presentAddress\": \"123 Main St, Cityville\",\n        \"permanentAddress\": \"456 Oak St, Townsville\",\n        \"academicDepartment\":\"65b00fb010b74fcbd7a25d8e\"\n    }\n}",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{ph-local-url}}/users/create-faculty",
@@ -315,15 +383,28 @@
 					"name": "Create Admin",
 					"request": {
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"admin\": {\r\n        \"designation\":\"Admin\",\r\n        \"name\": {\r\n            \"firstName\": \"Mr. Mezbaul\",\r\n            \"middleName\": \"Abedin\",\r\n            \"lastName\": \"Forhan\"\r\n        },\r\n        \"gender\": \"male\",\r\n        \"dateOfBirth\": \"1998-04-24\",\r\n        \"email\": \"mezbaul@programming-hero.com\",\r\n        \"contactNo\": \"123567\",\r\n        \"emergencyContactNo\": \"987-654-3210\",\r\n        \"bloogGroup\": \"A+\",\r\n        \"presentAddress\": \"123 Main St, Cityville\",\r\n        \"permanentAddress\": \"456 Oak St, Townsville\",\r\n        \"profileImg\": \"path/to/profile/image.jpg\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{superADminToken}}",
+								"type": "text"
 							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/saminravi99/Downloads/414402027_1367032297316085_3242041099875548910_n.png",
+									"disabled": true
+								},
+								{
+									"key": "data",
+									"value": "{\n    \"password\": \"admin123\",\n    \"admin\": {\n        \"designation\": \"Admin\",\n        \"name\": {\n            \"firstName\": \"Mr. Mezbaul\",\n            \"middleName\": \"Abedin\",\n            \"lastName\": \"Forhan\"\n        },\n        \"gender\": \"male\",\n        \"dateOfBirth\": \"1998-04-24\",\n        \"email\": \"mezbaul2@programming-hero.com\",\n        \"contactNo\": \"12356789\",\n        \"emergencyContactNo\": \"12356789\",\n        \"bloogGroup\": \"O+\",\n        \"presentAddress\": \"123 Main St, Cityville\",\n        \"permanentAddress\": \"456 Oak St, Townsville\"\n    }\n}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "{{ph-local-url}}/users/create-admin",
@@ -369,7 +450,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI5MTMxNTIsImV4cCI6MTcwMjk5OTU1Mn0.5kbBxNCvCxgVRVHDoLaUpxvaqNA-Y-xTRVHbtA-Q3Tk",
+								"value": "{{adminToken}}",
 								"type": "text"
 							}
 						],
@@ -408,7 +489,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -424,18 +511,6 @@
 								"api",
 								"v1",
 								"students"
-							],
-							"query": [
-								{
-									"key": "searchTerm",
-									"value": "ravi",
-									"disabled": true
-								},
-								{
-									"key": "email",
-									"value": "ravi@gmail.com$sort",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -448,12 +523,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyMDMwMDEwMDAxIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3MDI5MDk4NDgsImV4cCI6MTcwMjk5NjI0OH0.6xGTuSbLr6A10AzKnAZLVdbHZY7GnJ92FXAescA8mUQ",
+								"value": "{{superADminToken}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/v1/students/658056522d7914bff94e67d1",
+							"raw": "http://localhost:5000/api/v1/students/65b016db47c500c09d0bed2f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -463,7 +538,7 @@
 								"api",
 								"v1",
 								"students",
-								"658056522d7914bff94e67d1"
+								"65b016db47c500c09d0bed2f"
 							]
 						}
 					},
@@ -517,6 +592,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "academic transcript",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ph-local-url}}/students/academic-transcript/65aeaa5df2dba4614fa68c19",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"students",
+								"academic-transcript",
+								"65aeaa5df2dba4614fa68c19"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -533,7 +627,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDI3NTEzMjEsImV4cCI6MTcwMzYxNTMyMX0.wKxdQkzGSdk3qGaoDFQGsSAalN3j12_ltubfeucXhU0",
+								"value": "{{adminToken}}",
 								"type": "text"
 							}
 						],
@@ -648,7 +742,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -685,7 +785,13 @@
 					"name": "Get Single Admin",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:5000/api/v1/admins/656ddf1c0e2e5dab57dbdad7",
 							"protocol": "http",
@@ -707,7 +813,13 @@
 					"name": "Delete Admin",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:5000/api/v1/admins/657dcc7a2c59c16597756e4e",
 							"protocol": "http",
@@ -729,7 +841,13 @@
 					"name": "Update Admin",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"student\": {\r\n        \"contactNo\":\"0000\",\r\n        \"name\": {\r\n            \"lastName\": \"Persian\"\r\n        },\r\n    \"guardian\": {\r\n        \"fatherOccupation\":\"Engineeer\"\r\n    }\r\n    }\r\n}",
@@ -761,10 +879,16 @@
 					"name": "Create Academic  Semester",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Autumn\",\r\n  \"year\": \"2030\",\r\n  \"code\": \"01\",\r\n  \"startMonth\": \"May\",\r\n  \"endMonth\": \"August\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Fall\",\r\n  \"year\": \"2025\",\r\n  \"code\": \"03\",\r\n  \"startMonth\": \"September\",\r\n  \"endMonth\": \"December\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -795,7 +919,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -825,7 +955,13 @@
 					"name": "Get Single Academic Semester",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:5000/api/v1/academic-semesters/65646ac154dfafc1a9ce2806jjjjj",
 							"protocol": "http",
@@ -852,10 +988,16 @@
 					"name": "Create Academic Department",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Department of L1\",\r\n    \"academicFaculty\":\"656701a9adaebc55db21bde8\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Department of L1\",\r\n    \"academicFaculty\":\"65b00f3510b74fcbd7a25d86\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -879,7 +1021,13 @@
 					"name": "Get All Departments",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{ph-local-url}}/academic-departments",
 							"host": [
@@ -896,7 +1044,13 @@
 					"name": "Get Single Department",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{ph-local-url}}/academic-departments/gggg",
 							"host": [
@@ -914,7 +1068,13 @@
 					"name": "Update Department",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"testing2223\"\r\n}",
@@ -946,7 +1106,13 @@
 					"name": "Create Academic Faculty",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"Faculty of Programming\"\r\n}",
@@ -973,7 +1139,13 @@
 					"name": "Get All Aacdemic  Faculties",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{ph-local-url}}/academic-faculties",
 							"host": [
@@ -990,7 +1162,13 @@
 					"name": "Get Single Faculty",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{ph-local-url}}/academic-faculties/hhh",
 							"host": [
@@ -1040,10 +1218,16 @@
 					"name": "Create Course",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Hyper Text Markup Language\",\r\n    \"prefix\": \"HTML\",\r\n    \"code\": 101,\r\n    \"credits\": 3,\r\n    \"isDeleted\": false\r\n}",
+							"raw": "{\r\n    \"title\": \"Dom Manipulation\",\r\n    \"prefix\": \"JS\",\r\n    \"code\": 108,\r\n    \"credits\": 3,\r\n    \"isDeleted\": false,\r\n    \"preRequisiteCourses\": [\r\n        {\r\n            \"course\": \"65b5ff53d6ffdd9bfc058320\",\r\n            \"isDeleted\": false\r\n        },\r\n         {\r\n            \"course\": \"65b5ffc2d6ffdd9bfc058326\",\r\n            \"isDeleted\": false\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1067,7 +1251,13 @@
 					"name": "Get All Courses",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{ph-local-url}}/courses",
 							"host": [
@@ -1075,6 +1265,18 @@
 							],
 							"path": [
 								"courses"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "searchTerm",
+									"value": "basic",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -1147,7 +1349,50 @@
 					"name": "Assign Faculties",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"faculties\": [\"65b08432cb87974826d0b7a7\",\"65b0844ccb87974826d0b7af\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ph-local-url}}/courses/65b6001fd6ffdd9bfc058329/assign-faculties",
+							"host": [
+								"{{ph-local-url}}"
+							],
+							"path": [
+								"courses",
+								"65b6001fd6ffdd9bfc058329",
+								"assign-faculties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course Faculties",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"faculties\": [\"656f4d1dd76e9d4aa33ae1f8\"]\r\n}",
@@ -1158,14 +1403,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{ph-local-url}}/courses/656f2ab70909e55eba6b2fc1/assign-faculties",
+							"raw": "{{ph-local-url}}/courses/65b5fed5d6ffdd9bfc05831a/get-faculties",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"courses",
-								"656f2ab70909e55eba6b2fc1",
-								"assign-faculties"
+								"65b5fed5d6ffdd9bfc05831a",
+								"get-faculties"
 							]
 						}
 					},
@@ -1208,10 +1453,16 @@
 					"name": "Create Semester Registration",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"academicSemester\": \"65663d516435f247a24e9169\",\r\n    \"status\": \"UPCOMING\",\r\n    \"startDate\": \"2030-01-10T04:00:01Z\",\r\n    \"endDate\": \"2030-04-24T17:59:59Z\",\r\n    \"minCredit\": 6,\r\n    \"maxCredit\": 16\r\n}",
+							"raw": "{\r\n    \"academicSemester\": \"65b0104110b74fcbd7a25d92\",\r\n    \"status\": \"UPCOMING\",\r\n    \"startDate\": \"2025-01-10T04:00:01Z\",\r\n    \"endDate\": \"2025-04-24T17:59:59Z\",\r\n    \"minCredit\": 6,\r\n    \"maxCredit\": 16\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1235,10 +1486,16 @@
 					"name": "Update Semester Registration",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"status\":\"ONGOING\",\r\n    \"minCredit\": 3\r\n}",
+							"raw": "{\r\n    \"status\":\"ONGOING\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1246,13 +1503,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{ph-local-url}}/semester-registrations/657872df6e1c4f8c4c2e7c0a",
+							"raw": "{{ph-local-url}}/semester-registrations/65b6185f13c0a33cdf61589a",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"semester-registrations",
-								"657872df6e1c4f8c4c2e7c0a"
+								"65b6185f13c0a33cdf61589a"
 							]
 						}
 					},
@@ -1261,7 +1518,7 @@
 				{
 					"name": "Delete Semester Registration",
 					"request": {
-						"method": "PATCH",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -1287,8 +1544,11 @@
 				},
 				{
 					"name": "Get All Semester Registration",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -1340,33 +1600,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Delete Semester Registration",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"academicSemester\": \"60a8c088c69a1a001c5d9a1a\",\r\n    \"status\": \"ONGOING\",\r\n    \"startDate\": \"2023-01-01T00:00:00Z\",\r\n    \"endDate\": \"2023-05-31T23:59:59Z\",\r\n    \"minCredit\": 6,\r\n    \"maxCredit\": 18\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ph-local-url}}/semester-registrations/65797e9dab434256ca6e6488",
-							"host": [
-								"{{ph-local-url}}"
-							],
-							"path": [
-								"semester-registrations",
-								"65797e9dab434256ca6e6488"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1377,10 +1610,16 @@
 					"name": "Create Offered Course",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"semesterRegistration\":\"657f07f25f71bfe7a0eb4301\",\r\n  \"academicFaculty\":\"656701a9adaebc55db21bde8\",\r\n  \"academicDepartment\": \"65797f29ab434256ca6e648c\",\r\n  \"course\": \"657707078cf5db4b6e5e6450\",\r\n  \"faculty\": \"656dce37133c4a8a53eb5f09\",\r\n  \"section\": 1,\r\n  \"maxCapacity\": 50,\r\n  \"days\": [\"Sun\",\"Mon\"],\r\n  \"startTime\": \"10:30\",\r\n  \"endTime\": \"12:30\"\r\n}",
+							"raw": "{\r\n  \"semesterRegistration\":\"65b6185f13c0a33cdf61589a\",\r\n  \"academicFaculty\":\"65b00f3510b74fcbd7a25d86\",\r\n  \"academicDepartment\": \"65b00fb010b74fcbd7a25d8e\",\r\n  \"course\": \"65b6001fd6ffdd9bfc058329\",\r\n  \"faculty\": \"65b0844ccb87974826d0b7af\",\r\n  \"section\": 1,\r\n  \"maxCapacity\": 30,\r\n  \"days\": [\"Mon\",\"Wed\"],\r\n  \"startTime\": \"12:30\",\r\n  \"endTime\": \"14:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1442,7 +1681,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1469,6 +1714,56 @@
 					"response": []
 				},
 				{
+					"name": "Get My Offered Courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{studentToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/offered-courses/my-offered-courses?page=1&limit=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"offered-courses",
+								"my-offered-courses"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Single Single Offered Course",
 					"request": {
 						"method": "GET",
@@ -1489,33 +1784,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"registeredSemester\": \"65720fd6a6737aba6dc9cc5c\",\r\n    \"academicDepartment\": \"656701b4adaebc55db21bdea\",\r\n    \"course\": \"656f2ab70909e55eba6b2fc1\",\r\n    \"faculty\": \"656dce37133c4a8a53eb5f09\",\r\n    \"maxCapacity\": 50,\r\n    \"section\": 2,\r\n    \"days\": [\r\n        \"Saturday\",\r\n        \"Sunday\"\r\n    ],\r\n    \"time\": \"10-12\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{ph-local-url}}/offered-courses/create-offered-course",
-							"host": [
-								"{{ph-local-url}}"
-							],
-							"path": [
-								"offered-courses",
-								"create-offered-course"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1523,13 +1791,19 @@
 			"name": "Enrolled Courses",
 			"item": [
 				{
-					"name": "Enroll Into course",
+					"name": "Create Enrolled Into  Course",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{studentToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\r\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\"\r\n}",
+							"raw": "{\r\n     \"offeredCourse\": \"65b66fd28cbfc00b54ba4f00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1550,13 +1824,22 @@
 					"response": []
 				},
 				{
-					"name": "Update Mark",
+					"name": "Get My Enrolled Courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "PATCH",
-						"header": [],
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{studentToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\n    \"semesterRegistration\": \"657f07f25f71bfe7a0eb4301\",\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\",\n    \"courseMarks\": {\n        \"classTest1\": 85,\n        \"midTerm\": 75,\n        \"classTest2\": 90,\n        \"finalTerm\": 92\n    }\n}",
+							"raw": "{\r\n     \"offeredCourse\": \"65b66fd28cbfc00b54ba4f00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1564,26 +1847,32 @@
 							}
 						},
 						"url": {
-							"raw": "{{ph-local-url}}/enrolled-courses/update-marks",
+							"raw": "{{ph-local-url}}/enrolled-courses/my-enrolled-courses",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"enrolled-courses",
-								"update-marks"
+								"my-enrolled-courses"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update Final Mark",
+					"name": "Update Enrolled Course Marks",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{facultyToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"student\": \"657f0bcf5d17ffef90133cd6\",\n    \"semesterRegistration\": \"657f07f25f71bfe7a0eb4301\",\n    \"offeredCourse\": \"657f0a5a14549ccc0551a589\",\n    \"courseMarks\": {\n        \"classTest1\": 95,\n        \"midTerm\": 35,\n        \"classTest2\": 20,\n        \"finalTerm\": 100\n    }\n}",
+							"raw": "{\n    \"semesterRegistration\": \"65b6185f13c0a33cdf61589a\",\n    \"offeredCourse\": \"65b66f2a8cbfc00b54ba4ee2\",\n    \"student\": \"65b016db47c500c09d0bed2f\",\n    \"courseMarks\": {\n        \"classTest1\": 10,\n        \"midTerm\": 30,\n        \"classTest2\": 10,\n        \"finalTerm\": 50\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1591,13 +1880,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{ph-local-url}}/enrolled-courses/update-final-marks",
+							"raw": "{{ph-local-url}}/enrolled-courses/update-enrolled-course-marks",
 							"host": [
 								"{{ph-local-url}}"
 							],
 							"path": [
 								"enrolled-courses",
-								"update-final-marks"
+								"update-enrolled-course-marks"
 							]
 						}
 					},
@@ -1620,6 +1909,52 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ph-local-url",
+			"value": "http://localhost:5000/api/v1/"
+		},
+		{
+			"key": "superADminToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMDAxIiwicm9sZSI6InN1cGVyQWRtaW4iLCJpYXQiOjE3MDYwMzcwMDUsImV4cCI6MTcwNjkwMTAwNX0.xF62ufGBiHRckmr54M1mPeyDqz80pbjpotjyWIJcdKU",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBLTAwMDEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDY0MjU3ODAsImV4cCI6MTcwNzI4OTc4MH0.fy3ViyNMG6XeQqmLq_KpWlTHI1TmivmkKnsjFTnHg5E",
+			"type": "string"
+		},
+		{
+			"key": "studentToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyMDI1MDEwMDAxIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE3MDY0NjgxNjksImV4cCI6MTcwNzMzMjE2OX0.WNaTTOx_YDmKggTwibZxSlrDnWX1Jbf2b_O9hSDzI30",
+			"type": "string"
+		},
+		{
+			"key": "facultyToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJGLTAwMDEiLCJyb2xlIjoiZmFjdWx0eSIsImlhdCI6MTcwNjU0NzQ4OSwiZXhwIjoxNzA3NDExNDg5fQ.i2Sb2Bphii6Fa9O8avp5IZbAPf-Nlk4fmGdg49Vapa0",
+			"type": "string"
 		}
 	]
 }
